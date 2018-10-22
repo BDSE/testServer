@@ -6,7 +6,7 @@ import Root from './root';
 
 
 //import test.js
-import './js/Test.js';
+import './js_test_for_browser';
 //import SASS
 import './scss/main.scss';
 
