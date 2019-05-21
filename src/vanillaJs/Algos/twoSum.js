@@ -4,7 +4,7 @@ var twoSum = function(nums, target) {
         if(cache[nums[i]]){
             return [cache[nums[i]]-1, i];
         }else{
-           cache[target-nums[i]] = i+1;   
+            cache[target-nums[i]] = i+1;
         }
     }
 };

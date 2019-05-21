@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+.container{
+    width: 50%;
+    margin: 0 auto;
+}
+.content{
+    max-height: 0;
+    transition: max-height 1s;
+    border: 1px solid purple;
+    overflow-y: hidden;
+}
+
+.button{
+    background: #f2f2;
+    padding : 5px;
+    cursor: pointer;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.button.active{
+    background: purple;
+    color: #ffffff;
+}
