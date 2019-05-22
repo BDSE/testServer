@@ -44,13 +44,13 @@ server.post('/*', function(req, res){
 
     incommingData.meta = {
       code: 200
-    }
+    };
 
     res.jsonp(incommingData);
   }, function(){
      incommingData = {
        code: "unable to write data"
-     }
+     };
      res.jsonp(incommingData);
   });
 });
@@ -63,4 +63,4 @@ server.listen(PORT, (err) => {
   }else{
     console.info("Json server running on port 3000 ");
   }
-})
+});

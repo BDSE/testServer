@@ -11,3 +11,14 @@ for(var i =0; i <= 5; i++){
 
 console.log(myLinkedList1.tostring());
 console.log(myLinkedList1.len());
+
+myLinkedList1.reverse();
+
+console.log("reversed...",myLinkedList1.tostring());
+
+myLinkedList1.reverse();
+
+console.log("reversed...2",myLinkedList1.tostring());
+myLinkedList1.reverse();
+
+console.log("reversed...3",myLinkedList1.tostring());

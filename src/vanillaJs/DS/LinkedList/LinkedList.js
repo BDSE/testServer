@@ -18,6 +18,31 @@ const LinkedList = (function () {
         getLastNode: function(){
             return this.lastNode;
         },
+        getHeader: function(){
+          return this.headNode;
+        },
+        reverse: function () {
+            var prev1, prev2, curentNode = this.headNode;
+            while(curentNode){
+                if(prev1 && prev2){
+                    prev1.setNextNode(prev2);
+                }else if(prev1){
+                    this.lastNode = prev1;
+                    prev1.setNextNode(null);
+                }
+
+                if(!curentNode.getNextNode()){
+                    //last node
+                    curentNode.setNextNode(prev1);
+                    this.headNode = curentNode;
+                    curentNode = null; //terminate the loop
+                }else{
+                    prev2 = prev1;
+                    prev1 = curentNode;
+                    curentNode = curentNode.getNextNode();
+                }
+            }
+        },
         len: function () {
             var len = 0,
                 currentNode = this.headNode;
