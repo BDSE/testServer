@@ -56,7 +56,7 @@ const LinkedList = (function () {
             var currentNode = this.headNode,
                 resultStr = '{';
             while(currentNode){
-                resultStr = resultStr + currentNode.getData() + (this.getLastNode() !== currentNode ? ' ==> ' : '');
+                resultStr = resultStr + currentNode.getData() + (currentNode.hasNext() ? ' ==> ' : '');
                 currentNode = currentNode.getNextNode();
             }
             resultStr += '}';
