@@ -1,0 +1,65 @@
+.progress-steps {
+  $step-size: 35px;
+  $border-width: 3px;
+  $border-color: #ddd;
+  $active-color: #8C1514;
+
+  width: 100%;
+  ul {
+    list-style-type: none;
+    counter-reset: count;
+    padding: 0;
+    margin: 0;
+
+    li.step {
+      float: left;
+      cursor: not-allowed;
+      position: relative;
+      text-align: center;
+
+      &::before {
+        counter-increment: count;
+        content: counter(count);
+        display: block;
+        height: $step-size;
+        width: $step-size;
+        margin: 0 auto 10px auto;
+        border-radius: 50%;
+        border: $border-width solid $border-color;
+        text-align: center;
+        vertical-align: middle;
+        line-height: $step-size;
+        background-color: #fff;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: $step-size/2;
+        left: -50%;
+        width: 100%;
+        height: $border-width;
+        background-color: $border-color;
+        z-index: -1;
+      }
+
+      &.current, &.past {
+        cursor: pointer;
+        &::before {
+          color: $active-color;
+          border-color: $active-color;
+        }
+
+        &::after {
+          background-color: $active-color;
+        }
+      }
+
+      &:first-child {
+        &:after {
+          content: none;
+        }
+      }
+    }
+  }
+}

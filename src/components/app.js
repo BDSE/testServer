@@ -1,13 +1,43 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Accordion from "./UIExamples/Accoridan/Accordian";
+import ProgressSteps from "./UIExamples/ProgressSteps/ProgressSteps";
 
 export default class App extends Component {
-  render() {
-    return (
-      <div>
-        Main App Component
-        <Accordion/>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            progressSteps: [
+                {
+                    text: 'Step1',
+                    isCurrent: false
+                },
+                {
+                    text: 'Step2',
+                    isCurrent: false
+                },
+                {
+                    text: 'Step3',
+                    isCurrent: false
+                },
+                {
+                    text: 'Step4',
+                    isCurrent: true
+                },
+                {
+                    text: 'Step5',
+                    isCurrent: false
+                }
+            ]
+        };
+    }
+
+    render() {
+        return (
+            <div className="main">
+                <div className="hdr">Main App Component</div>
+                {/*<Accordion/>*/}
+                <ProgressSteps steps={this.state.progressSteps}/>
+            </div>
+        );
+    }
 }
