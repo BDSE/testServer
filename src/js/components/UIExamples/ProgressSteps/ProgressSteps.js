@@ -24,7 +24,7 @@ class ProgressSteps extends Component {
             <div className="progress-steps container">
                 <ul>
                     {steps.map((step, index) => {
-                            return (<li className={"step " + (index < currentIndex ? 'past' : index === currentIndex ? 'current' : 'future')}
+                            return (<li className={"step icon " + (index < currentIndex ? 'past' : index === currentIndex ? 'current' : 'future')}
                                 style={{width: `${this.state.stepWidth}%`}}>{step.text}</li>);
                         }
                     )}

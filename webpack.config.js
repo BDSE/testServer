@@ -36,7 +36,7 @@ let config = {
         port: 3000,
         open: true,
         proxy: {
-         '/api': 'http://localhost:8080'
+            '/api': 'http://localhost:8080'
         },
         historyApiFallback: true,
         contentBase: './src/index.html',
@@ -50,58 +50,62 @@ let config = {
                 use: ["css-loader"]
             })
         },
-        {
-            test: /\.scss$/,
-            use: ExtractTextPlugin.extract({
-                fallback: "style-loader", // creates style nodes from JS strings
-                use: [
-                    'css-loader',
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            outputStyle: (!isPrd) ? "expanded" : "compressed",
-                            sourceComments: (!isPrd) ? true : false,
-                            sourceMap: false
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader", // creates style nodes from JS strings
+                    use: [
+                        'css-loader',
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                outputStyle: (!isPrd) ? "expanded" : "compressed",
+                                sourceComments: (!isPrd),
+                                sourceMap: false
+                            }
                         }
+                    ]
+                })
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
+            },
+            {
+                test: /\.js$/,
+                exclude: [/lib/, /node_modules/],
+                use: 'babel-loader'
+            },
+            {
+                test: /\.js$/, // include .js files
+                enforce: "pre", // preload the jshint loader
+                exclude: [/lib/, /node_modules/], //exclude file from node_modules folder
+                use: [{
+                    loader: "eslint-loader", //options can be modified according to the preferences.
+                    options: {
+                        emitError: true,
+                        failOnError: true,
                     }
-                ]
-            })
-        },
-        {
-            test: /\.js$/,
-            exclude: [/lib/, /node_modules/],
-            use: 'babel-loader'
-        },
-        {
-            test: /\.js$/, // include .js files
-            enforce: "pre", // preload the jshint loader
-            exclude: [/lib/, /node_modules/], //exclude file from node_modules folder
-            use: [{
-                loader: "eslint-loader", //options can be modified according to the preferences.
-                options: {
-                    emitError: true,
-                    failOnError: true,
-                }
-            }]
-        },
-        {
-            test: /\.js$/,
-            use: ["source-map-loader"],
-            exclude: /node_modules/,
-            enforce: "pre"
-        },
-        {
-            test: /\.(jpe?g|png|gif|svg)$/,
-            use: [{
-                loader: 'file-loader'
-            }]
-        },
-        {
-            //for the html templates that needs to be converted to a jsp, raw loader will let the webpack ignore the jsp syntax
-            // and not throw an error.
-            test: /\.html$/,
-            use: 'raw-loader'
-        }
+                }]
+            },
+            {
+                test: /\.js$/,
+                use: ["source-map-loader"],
+                exclude: /node_modules/,
+                enforce: "pre"
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                use: [{
+                    loader: 'file-loader'
+                }]
+            },
+            {
+                //for the html templates that needs to be converted to a jsp, raw loader will let the webpack ignore the jsp syntax
+                // and not throw an error.
+                test: /\.html$/,
+                use: 'raw-loader'
+            }
         ]
     },
     plugins: [
@@ -157,7 +161,7 @@ else {
                 uglifyOptions: {
                     ie8: false,
                     ecma: 8,
-                    parallel:true,
+                    parallel: true,
                     output: {
                         comments: false,
                         beautify: false

@@ -6,7 +6,7 @@ import Root from './root';
 
 
 //import vanilla.js
-import './vanillaJs';
+import './js/vanillaJs';
 //import SASS
 import './scss/main.scss';
 

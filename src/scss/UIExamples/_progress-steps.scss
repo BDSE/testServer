@@ -18,8 +18,7 @@
       text-align: center;
 
       &::before {
-        counter-increment: count;
-        content: counter(count);
+        content: '\f30e';
         display: block;
         height: $step-size;
         width: $step-size;
