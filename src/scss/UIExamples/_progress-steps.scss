@@ -1,63 +1,79 @@
 .progress-steps {
-  $step-size: 35px;
-  $border-width: 3px;
-  $border-color: #ddd;
-  $active-color: #8C1514;
+  $step-size: 48px;
+  $inactive-color: #b6b1a9;
+  $visited-color: #00505c;
+  $inactive-icn-font-size: 18px;
+  $visited-icn-font-size: 21px;
+  $icon-border-width: 3px;
+  $connector-height: 6px;
+  $connector-color: #f5f5f5;
+  $offset: 6px;
 
   width: 100%;
   ul {
     list-style-type: none;
-    counter-reset: count;
     padding: 0;
     margin: 0;
-
-    li.step {
+    li {
       float: left;
-      cursor: not-allowed;
-      position: relative;
       text-align: center;
-
-      &::before {
-        content: '\f30e';
-        display: block;
-        height: $step-size;
-        width: $step-size;
-        margin: 0 auto 10px auto;
-        border-radius: 50%;
-        border: $border-width solid $border-color;
-        text-align: center;
-        vertical-align: middle;
-        line-height: $step-size;
-        background-color: #fff;
-      }
-
-      &:after {
+      position: relative;
+      color: $inactive-color;
+      &::after {
         content: '';
         position: absolute;
-        top: $step-size/2;
+        top: ($step-size/2) - $connector-height/2;
         left: -50%;
         width: 100%;
-        height: $border-width;
-        background-color: $border-color;
-        z-index: -1;
+        height: $connector-height;
+        background-color: $connector-color;
+        z-index: 1;
       }
-
-      &.current, &.past {
-        cursor: pointer;
-        &::before {
-          color: $active-color;
-          border-color: $active-color;
-        }
-
-        &::after {
-          background-color: $active-color;
-        }
-      }
-
       &:first-child {
         &:after {
           content: none;
         }
+      }
+      div.icon-div{
+        height: $step-size;
+        width: $step-size;
+        position: relative;
+        border-radius: 50%;
+        background-color: $connector-color;
+        margin: 0 auto 5px auto;
+        cursor: not-allowed;
+        &::before {
+          content: '\f309';
+          display: block;
+          font-size: $inactive-icn-font-size;
+          box-sizing: border-box;
+          border: $icon-border-width solid $inactive-color;
+          width:  $step-size - ($offset * 2);
+          height:  $step-size - ($offset * 2);
+          border-radius: 50%;
+          position: absolute;
+          left: $offset;
+          top: $offset;
+          line-height: $step-size - ($offset * 2) - ($icon-border-width * 2);
+          background-color: #fff;
+          z-index: 9;
+        }
+      }
+      &.visited {
+        div.icon-div{
+          color: $visited-color;
+          cursor: pointer;
+          &::before {
+            border-color: $visited-color;
+          }
+        }
+        &::after {
+          background-color: $visited-color;
+        }
+      }
+      &.current{
+        color: $visited-color;
+        font-weight: bold;
       }
     }
   }

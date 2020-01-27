@@ -13,15 +13,16 @@ export default class App extends Component {
                 },
                 {
                     text: 'Step2',
-                    isCurrent: false
+                    isCurrent: true
                 },
                 {
                     text: 'Step3',
-                    isCurrent: false
+                    isCurrent: false,
+                    highestStep: true
                 },
                 {
                     text: 'Step4',
-                    isCurrent: true
+                    isCurrent: false
                 },
                 {
                     text: 'Step5',

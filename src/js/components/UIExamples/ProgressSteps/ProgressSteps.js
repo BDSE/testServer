@@ -12,11 +12,11 @@ class ProgressSteps extends Component {
 
     render() {
         const steps = this.props.steps;
-        let currentIndex = 0;
+        let highestIndex = 0;
 
         for (let i = 0; i < steps.length; i++) {
-            if (steps[i].isCurrent) {
-                currentIndex = i;
+            if (steps[i].highestStep) {
+                highestIndex = i;
             }
         }
 
@@ -24,8 +24,14 @@ class ProgressSteps extends Component {
             <div className="progress-steps container">
                 <ul>
                     {steps.map((step, index) => {
-                            return (<li className={"step icon " + (index < currentIndex ? 'past' : index === currentIndex ? 'current' : 'future')}
-                                style={{width: `${this.state.stepWidth}%`}}>{step.text}</li>);
+                            return (
+                                <li className={"step " + (index <= highestIndex ? 'visited ' : 'future ') + (step.isCurrent ? 'current' : '')} style={{width: `${this.state.stepWidth}%`}}>
+                                    <div className="icon-div icon">
+
+                                    </div>
+                                    <div className="txt">{step.text}</div>
+                                </li>
+                            );
                         }
                     )}
                     <div className="clear"></div>
