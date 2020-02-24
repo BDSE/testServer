@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import Accordion from "./UIExamples/Accoridan/Accordian";
-import ProgressSteps from "./UIExamples/ProgressSteps/ProgressSteps";
+import React, { Component } from 'react';
+import Accordion from "./Accoridan/Accordian";
+import ProgressSteps from "./ProgressSteps/ProgressSteps";
 
-export default class App extends Component {
+
+class IndexComponentUIExamples extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,11 +35,12 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="main">
-                <div className="hdr">Main App Component</div>
-                {/*<Accordion/>*/}
-                <ProgressSteps steps={this.state.progressSteps}/>
+            <div id="IndexComponentUIExamples">
+                <Accordion />
+                <ProgressSteps steps={this.state.progressSteps} />
             </div>
         );
     }
 }
+
+export default IndexComponentUIExamples;
