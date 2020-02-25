@@ -35,9 +35,15 @@ class IndexComponentUIExamples extends Component {
 
     render() {
         return (
-            <div id="IndexComponentUIExamples">
-                <Accordion />
-                <ProgressSteps steps={this.state.progressSteps} />
+            <div>
+                <div className="section">
+                    <div className="section-hdr">Accordian</div>
+                    <Accordion />
+                </div>
+                <div className="section">
+                    <div className="section-hdr">Subway Steps</div>
+                    <ProgressSteps steps={this.state.progressSteps} />
+                </div>
             </div>
         );
     }

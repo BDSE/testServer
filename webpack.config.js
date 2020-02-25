@@ -119,7 +119,7 @@ let config = {
         new htmlWebpackPlugin({
             chunks: ['manifest', 'commonVendor', 'reactVendor', 'reactApp'],
             title: 'Test React App!',
-            template: './reactIndexTemplate.html',
+            template: './templates/react/index.html',
             filename: path.resolve(context, 'build')+'/reactIndex.html',
             chunksSortMode: function (chunk1, chunk2) {
                 var orders = ['manifest', 'commonVendor', 'reactVendor', 'reactApp'];
@@ -137,7 +137,7 @@ let config = {
         new htmlWebpackPlugin({
             chunks: ['manifest', 'commonVendor', 'nonReactApp'],
             title: 'Test VanillaJS App!',
-            template: './nonReactIndexTemplate.html',
+            template: './templates/nonreact/index.html',
             filename: path.resolve(context, 'build')+'/nonReactIndex.html',
             chunksSortMode: function (chunk1, chunk2) {
                 var orders = ['manifest', 'commonVendor', 'nonReactApp'];

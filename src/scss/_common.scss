@@ -1,15 +1,35 @@
-.main{
-  .hdr{
-    display: table;
-    margin: 10px auto 40px auto;
-  }
+body{
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-size: $font-size-normal;
+  font-weight: $font-normal;
+  color: $font-color;
+
   .container{
-    padding: 30px;
-    border: 1px solid lightgray;
+    padding: $block-distance / 2;
+    border: 1px solid $light-border;
+    border-radius: $block-border-radius;
     width: 90%;
-    margin: 0 auto;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    margin: $block-distance auto;
+    .container-hdr{
+      font-size: $font-size-medium;
+      margin-bottom: $block-distance;
+      text-align: center;
+    }
+  }
+  .section{
+    padding: $block-distance / 2;
+    border: 1px solid $lighter-border;
+    border-radius: $block-border-radius;
+    background-color: $lighter-border;
+    &:not(:last-child){
+      margin-bottom: $block-distance;
+    }
+    .section-hdr{
+      text-align: left;
+      margin-bottom: 5px;
+      font-weight: $font-semi-bold;
+    }
   }
   .icon::before{
     font-family: "custom-test-font", sans-serif;
@@ -34,12 +54,12 @@
   .clear{
     clear:both;
   }
-}
-button{
-  padding: 10px 15px;
-  color: white;
-  background-color: darkgreen;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 18px;
+  button{
+    padding: 10px 15px;
+    color: white;
+    background-color: $dark-green;
+    font-weight: $font-semi-bold;
+    font-size: $font-size-normal;
+    cursor: pointer;
+  }
 }

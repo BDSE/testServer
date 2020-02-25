@@ -1,0 +1,24 @@
+#throttle-debounce{
+  $box-height: 100px;
+  .subsection{
+    width: 49%;
+    height: $box-height;
+    float: left;
+    box-sizing: border-box;
+    &#mosemove-box{
+      background-color: skyblue;
+      line-height: $box-height;
+      color: deepskyblue;
+      text-align: center;
+      cursor: pointer;
+    }
+    &#result{
+      font-size: $font-size-medium;
+      font-weight: $font-semi-bold;
+      padding: 15px $block-distance;
+      span{
+        font-weight: $font-light;
+      }
+    }
+  }
+}

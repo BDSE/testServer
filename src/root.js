@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import IndexComponent from './js/ReactStuff/components/IndexComponent';
+import App from './js/ReactStuff/AppIndex';
 
 class Root extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Root extends Component {
     render() {
         return (
             <Provider store={ this.props.store }>
-                <IndexComponent/>
+                <App/>
             </Provider>
         );
     }
