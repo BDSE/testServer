@@ -5,23 +5,22 @@ class Model {
         this.color = "red";
     }
 
-    increment(){
-        let colors = ["orange", "blue", "cyan", "green", "red"];
-
-        this.number++;
-
-        this.color = colors[Math.floor(Math.random * colors.length)];
-
-        this.notify();
-
-    }
-
     notify(){
         let observer;
         for(let i = 0; i < this.oberverList.length; i++){
             observer = this.oberverList[i];
             observer.update(this);
         }
+    }
+
+    increment(){
+        let colors = ["orange", "blue", "cyan", "green", "red", "black", "yellow", "pink", "grey"];
+
+        this.number++;
+
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+
+        this.notify();
     }
 
     addObserver(o){

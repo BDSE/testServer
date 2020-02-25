@@ -5,4 +5,4 @@ import './scss/main_non-react.scss';
 import './js/NonReactStuff/vanillaJs';
 
 //import UIconcepts related JS
-import "./js/NonReactStuff/ConceptsUsingUI"
+import "./js/NonReactStuff/ConceptsUsingUI";

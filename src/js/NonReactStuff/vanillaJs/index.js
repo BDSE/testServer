@@ -7,4 +7,4 @@
 
 //import './concepts/RandomNumber';
 
-import './concepts/Debounce_Throttle';
+//import './concepts/Debounce_Throttle';
