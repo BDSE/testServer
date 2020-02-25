@@ -7,13 +7,16 @@ const merge = require('webpack-merge');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const WebpackStrip = require('webpack-strip');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
 const isPrd = process.env.NODE_ENV === 'production';
 //const ASSET_PATH = process.env.ASSET_PATH || '';
 const context = __dirname + '/src';
 
 //Add js libraries here.
-const VENDOR_LIB = [
-    'jquery',
+const COMMON_VENDOR = [
+    'jquery'
+];
+const REACT_VENDOR = [
     'react',
     'react-dom',
     'react-redux',
@@ -23,14 +26,16 @@ const VENDOR_LIB = [
 
 let config = {
     entry: {
-        vendor: VENDOR_LIB,
-        main: './index.js'
+        commonVendor: COMMON_VENDOR,
+        reactVendor: REACT_VENDOR,
+        reactApp: './reactIndex.js',
+        nonReactApp: './nonReactIndex.js'
     },
     context: path.resolve(context),
     output: {
         filename: '[name].[chunkhash].js',
         path: path.resolve(context, 'build'),
-        publicPath: '/'
+        publicPath: './'
     },
     devServer: {
         port: 3000,
@@ -109,17 +114,48 @@ let config = {
         ]
     },
     plugins: [
-        new CleanDistFolder([context + "/build"]),
+        new CleanDistFolder([path.resolve(context, 'build')]),
         new ExtractTextPlugin("[name].[chunkhash].css"),
         new htmlWebpackPlugin({
-            chunks: ['main', 'vendor', 'manifest'],
-            title: 'Test Webapp!',
-            template: './indexTemplate.html'
+            chunks: ['manifest', 'commonVendor', 'reactVendor', 'reactApp'],
+            title: 'Test React App!',
+            template: './reactIndexTemplate.html',
+            filename: path.resolve(context, 'build')+'/reactIndex.html',
+            chunksSortMode: function (chunk1, chunk2) {
+                var orders = ['manifest', 'commonVendor', 'reactVendor', 'reactApp'];
+                var order1 = orders.indexOf(chunk1.names[0]);
+                var order2 = orders.indexOf(chunk2.names[0]);
+                if (order1 > order2) {
+                    return 1;
+                } else if (order1 < order2) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        }),
+        new htmlWebpackPlugin({
+            chunks: ['manifest', 'commonVendor', 'nonReactApp'],
+            title: 'Test VanillaJS App!',
+            template: './nonReactIndexTemplate.html',
+            filename: path.resolve(context, 'build')+'/nonReactIndex.html',
+            chunksSortMode: function (chunk1, chunk2) {
+                var orders = ['manifest', 'commonVendor', 'nonReactApp'];
+                var order1 = orders.indexOf(chunk1.names[0]);
+                var order2 = orders.indexOf(chunk2.names[0]);
+                if (order1 > order2) {
+                    return 1;
+                } else if (order1 < order2) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
         }),
         new webpack.optimize.CommonsChunkPlugin({
             //this plugin makes sure that chunks that are common between two entry points are not loaded multiple times
             //in this case vendor chunk will not be loaded twice even if you import a vendor file, say jquery, in your modules.
-            names: ['vendor', 'manifest'], //only add the common chunk to this bundle.
+            names: ['commonVendor', 'reactVendor', 'manifest'], //only add the common chunk to this bundle.
             minChunks: Infinity //infinity will not allow any other common chunk to be added in this vendor chunk.
         }),
         new webpack.DefinePlugin({
@@ -129,11 +165,29 @@ let config = {
 };
 
 if (!isPrd) {
-    if (process.env.reload) {
+    if(process.env.watchMode){
+        config = merge(config, {
+            watch: true,
+            watchOptions: {
+                ignored:[/lib/, /node_modules/, /build/, /node/]
+            }
+        });
         config.plugins.push(
             new WebpackShellPlugin({
-                onBuildStart: ['echo "Webpack starting build"'], onBuildExit: ['echo "rsync......"', 'cp-res']
+                onBuildStart: ['echo "#################### BUILD START ####################"'], onBuildExit: ['echo "#################### BUILD EXIT ####################"', 'cp-res']
             })
+        );
+    }
+    if (process.env.livereload) {
+        const livereloadOptions = {
+            protocol: "http",
+            delay: 500,
+            hostname: '127.0.0.1',
+            appendScriptTag: true
+        };
+        //this plugin works with webpack watch, after the watch finish compiling liverlreload is triggered.
+        config.plugins.push(
+            new LiveReloadPlugin(livereloadOptions)
         );
     }
     config = merge(config, {

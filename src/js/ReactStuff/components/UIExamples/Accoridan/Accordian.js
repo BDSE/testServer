@@ -37,7 +37,7 @@ class Accordion extends Component {
         return (
             <div id="accordion">
                 {tabs.map(tab =>
-                    <div>
+                    <div key={tab.hdr}>
                         <button className="accordion" onClick={this.toggle.bind(this, tab.hdr)}>{tab.hdr}</button>
                         <div className="panel">
                             <p>{tab.body}</p>

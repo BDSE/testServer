@@ -25,7 +25,7 @@ class ProgressSteps extends Component {
                 <ul>
                     {steps.map((step, index) => {
                             return (
-                                <li className={"step " + (index <= highestIndex ? 'visited ' : 'future ') + (step.isCurrent ? 'current' : '')} style={{width: `${this.state.stepWidth}%`}}>
+                                <li key={index} className={"step " + (index <= highestIndex ? 'visited ' : 'future ') + (step.isCurrent ? 'current' : '')} style={{width: `${this.state.stepWidth}%`}}>
                                     <div className="icon-div icon">
 
                                     </div>
