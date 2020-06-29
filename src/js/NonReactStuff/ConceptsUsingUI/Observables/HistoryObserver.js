@@ -1,14 +1,17 @@
 class HistoryObserver {
     constructor() {
-        this.history = [];
+        this.historyLastFive = [];
     }
 
-    update(model){
-        this.history.unshift(model.color);
-        if(this.history.length > 5){
-            this.history.pop();
+    update(model, newColor) {
+        if (newColor) {
+            this.historyLastFive.unshift(model.colorHistory[model.currentNumber - 1]);
         }
-        console.log("Last five colors are: "+ this.history.join("*"));
+        if (this.historyLastFive.length > 5) {
+            this.historyLastFive.pop();
+        }
+        console.log("Last five colors are: " + this.historyLastFive.join("|"));
+        console.log("All history : " + model.colorHistory.join("|"));
     }
 }
 

@@ -1,13 +1,12 @@
 #observablesPattern{
   .box{
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     text-align: center;
     color: white;
     border: 1px solid black;
-    background-color: red;
     display: inline-block;
-    line-height: 50px;
+    line-height: 70px;
     &.green{
       background-color: green;
     }
@@ -20,6 +19,9 @@
     &.blue{
       background-color: blue;
     }
+  }
+  .desc{
+    margin-top: 10px;
   }
   hr{
     margin: 20px 0;

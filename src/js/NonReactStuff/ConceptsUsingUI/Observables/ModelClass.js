@@ -1,26 +1,43 @@
 class Model {
     constructor(){
         this.oberverList = [];
-        this.number = 0;
-        this.color = "red";
+        this.currentNumber = 1;
+        this.colors = ["coral", "steelblue", "teal", "black", "indianred", "dodgerblue", "lightslategrey", "deeppink", "mediumorchid", "midnightblue", "tomato", "yellowgreen", "gold"];
+        this.colorHistory = ["indianred"];
     }
 
-    notify(){
+    notify(newColor){
         let observer;
         for(let i = 0; i < this.oberverList.length; i++){
             observer = this.oberverList[i];
-            observer.update(this);
+            observer.update(this, newColor);
         }
     }
 
+    init(){
+        this.notify(true);
+    }
+
     increment(){
-        let colors = ["orange", "blue", "cyan", "green", "red", "black", "yellow", "pink", "grey"];
+        let colors = this.colors,
+            color, newColor;
 
-        this.number++;
+        if (this.currentNumber === this.colorHistory.length){
+            color = colors[Math.floor(Math.random() * colors.length)];
+            this.colorHistory.push(color);
+            newColor = true;
+        }
 
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.currentNumber++;
 
-        this.notify();
+        this.notify(newColor);
+    }
+
+    decrement(){
+        if (this.currentNumber > 1){
+            --this.currentNumber;
+            this.notify();
+        }
     }
 
     addObserver(o){

@@ -61,5 +61,14 @@ body{
     font-weight: $font-semi-bold;
     font-size: $font-size-normal;
     cursor: pointer;
+    &.red{
+      background-color: #8c1515;
+    }
+    &.blue{
+      background-color: #007C92;
+    }
+    &.grey{
+      background-color: #444444;
+    }
   }
 }

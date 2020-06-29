@@ -2,8 +2,8 @@ class ConsoleLogObserver {
     constructor() {
     }
 
-    update(model){
-        console.log("Model updated, new number: "+model.number+", new color: "+model.color);
+    update(model) {
+        console.log("Model updated, current number: " + model.currentNumber + ", current color: " + model.colorHistory[model.currentNumber - 1]);
     }
 }
 
